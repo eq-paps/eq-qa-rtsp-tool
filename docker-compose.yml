@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 
 services:
   frontend:
@@ -20,8 +20,9 @@ services:
       - ./data:/data
     environment:
       - NODE_ENV=development
-      - MEDIAMTX_HOST=mediamtx
-      - MEDIAMTX_PORT=8554
+      - MEDIAMTX_HOST=${MEDIAMTX_HOST:-mediamtx}
+      - MEDIAMTX_INTERNAL_HOST=${MEDIAMTX_INTERNAL_HOST:-mediamtx}
+      - MEDIAMTX_PORT=${MEDIAMTX_PORT:-8554}
       - DATA_DIR=/data
     depends_on:
       - mediamtx
