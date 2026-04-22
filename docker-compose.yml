@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    environment:
+      - VITE_API_URL=http://localhost:3000
+    depends_on:
+      - backend
+    networks:
+      - rtsp-network
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./data:/data
+    environment:
+      - NODE_ENV=development
+      - MEDIAMTX_HOST=mediamtx
+      - MEDIAMTX_PORT=8554
+      - DATA_DIR=/data
+    depends_on:
+      - mediamtx
+    networks:
+      - rtsp-network
+
+  mediamtx:
+    image: bluenviron/mediamtx:latest
+    ports:
+      - "8554:8554"
+      - "1935:1935"
+      - "8888:8888"
+      - "8889:8889"
+    networks:
+      - rtsp-network
+
+networks:
+  rtsp-network:
+    driver: bridge

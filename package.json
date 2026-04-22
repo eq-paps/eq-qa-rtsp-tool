@@ -1,0 +1,9 @@
+{
+  "name": "rtsp-stream-tool",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "bash dev.sh",
+    "dev:docker": "docker compose up --build",
+    "setup": "cd backend && npm install && cd ../frontend && npm install"
+  }
+}

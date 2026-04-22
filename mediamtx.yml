@@ -1,0 +1,35 @@
+apiAddress: 0.0.0.0:9997
+
+rtspAddress: :8554
+rtpAddress: :8000
+rtcpAddress: :8001
+
+rtspsAddress: :8322
+rtspsKey: ""
+rtspsCert: ""
+
+rtmpAddress: :1935
+rtmpEncryption: "no"
+rtmpsAddress: :1936
+rtmpsKey: ""
+rtmpsCert: ""
+
+hlsAddress: :8888
+hlsAllowOrigin: "*"
+hlsAllowCredentials: "no"
+hlsEncryption: "no"
+hlsServerKey: ""
+hlsServerCert: ""
+
+webrtcAddress: :8889
+webrtcAllowOrigin: "*"
+webrtcEncryption: "no"
+webrtcServerKey: ""
+webrtcServerCert: ""
+
+paths:
+  all:
+    source: "publisher"
+    sourceOnDemand: "no"
+    sourceOnDemandStartTimeout: 10s
+    sourceOnDemandCloseAfter: 10s
