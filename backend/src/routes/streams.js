@@ -13,6 +13,10 @@ router.post('/', async (req, res) => {
     if (!video) return res.status(404).json({ error: 'Video not found' });
 
     const slug = `stream-${uuidv4().slice(0, 8)}`;
+    const internalHost = process.env.MEDIAMTX_INTERNAL_HOST || process.env.MEDIAMTX_HOST || 'mediamtx';
+    const externalHost = process.env.MEDIAMTX_HOST || 'localhost';
+    const port = process.env.MEDIAMTX_PORT || '8554';
+    
     const stream = {
       id: uuidv4(),
       name,
@@ -22,7 +26,8 @@ router.post('/', async (req, res) => {
       customFps,
       loop: !!loop,
       status: 'idle',
-      rtspUrl: `rtsp://${process.env.MEDIAMTX_HOST || 'localhost'}:${process.env.MEDIAMTX_PORT || '8554'}/${slug}`,
+      internalRtspUrl: `rtsp://${internalHost}:${port}/${slug}`,
+      rtspUrl: `rtsp://${externalHost}:${port}/${slug}`,
       createdAt: new Date().toISOString()
     };
 

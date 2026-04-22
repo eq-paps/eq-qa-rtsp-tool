@@ -26,7 +26,7 @@ export async function startStream(stream) {
     '-tune', 'zerolatency',
     '-rtsp_transport', 'tcp',
     '-f', 'rtsp',
-    stream.rtspUrl
+    stream.internalRtspUrl || stream.rtspUrl
   ].filter(Boolean);
 
   console.log(`[FFmpeg ${stream.id}] command: ffmpeg ${args.join(' ')}`);
