@@ -4,6 +4,7 @@ import TopBar from './components/TopBar';
 import UploadDropzone from './components/UploadDropzone';
 import VideoLibrary from './components/VideoLibrary';
 import StreamGrid from './components/StreamGrid';
+import BulkTestStreams from './components/BulkTestStreams';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -42,6 +43,16 @@ export default function App() {
       <TopBar ipv4={ipv4} />
       
       <main className="container mx-auto px-4 py-8 max-w-6xl">
+        <BulkTestStreams
+          streams={streams}
+          videos={videos}
+          apiUrl={API_URL}
+          onUpdate={() => {
+            fetchVideos();
+            fetchStreams();
+          }}
+        />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

@@ -55,3 +55,7 @@ export async function stopStream(streamId) {
     activeStreams.delete(streamId);
   }
 }
+
+export function getActiveStreams() {
+  return activeStreams;
+}
