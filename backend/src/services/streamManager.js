@@ -15,15 +15,25 @@ export async function startStream(stream) {
     ? stream.customFps
     : video.nativeFps;
 
+  const gop = Math.round(fps * 2);
+
   const args = [
     '-re',
     stream.loop ? '-stream_loop' : null,
     stream.loop ? '-1' : null,
+    '-use_wallclock_as_timestamps', '1',
     '-i', video.filePath,
     '-vf', `fps=${fps}`,
     '-c:v', 'libx264',
     '-preset', 'ultrafast',
     '-tune', 'zerolatency',
+    '-b:v', '2000k',
+    '-maxrate', '2500k',
+    '-bufsize', '4000k',
+    '-g', String(gop),
+    '-keyint_min', String(gop),
+    '-muxdelay', '0',
+    '-muxpreload', '0',
     '-rtsp_transport', 'tcp',
     '-f', 'rtsp',
     stream.internalRtspUrl || stream.rtspUrl
